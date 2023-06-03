@@ -34,7 +34,7 @@ function App() {
   }, [clickedId]);
 
   return (
-    <div>
+    <div style={{padding : "5rem"}}>
       <h1>Blogs</h1>
       {loading && <h1>Loading...</h1>}
       <div
@@ -63,11 +63,11 @@ function App() {
           style={{
             width: "100%",
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
             position: "sticky",
             top: "0",
             height: "100vh",
+            padding : "5rem 1rem 1rem 1rem"
           }}
         >
           {clickedDetails == null ? (
