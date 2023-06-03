@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function ResumeBuilder() {
+  const skillset = ["HTML", "CSS", "JS", "REACT"];
   const [name, setName] = useState("");
   const [age, setAge] = useState(null);
   const [college, setCollege] = useState("");
@@ -11,24 +12,21 @@ export default function ResumeBuilder() {
     setName(newname);
   }
 
-  function HandleAgeChange(newage) {
+  function handleAgeChange(newage) {
     setAge(newage);
   }
 
-  function HandleCollegeChange(newcollege) {
+  function handleCollegeChange(newcollege) {
     setCollege(newcollege);
   }
 
-  function HandleCgpaChange(newcgpa) {
+  function handleCgpaChange(newcgpa) {
     setCgpa(newcgpa);
   }
 
-  function HandleCheckboxClick(skill) {
-    // if check if array skill -> if already
-    // if already present -> remove otherwise add
+  function handleCheckboxClick(skill) {
     const found = skills.includes(skill);
     if (found == false) {
-      // not found
       setSkills([...skills, skill]);
     } else {
       setSkills((prevSkills) => {
@@ -63,7 +61,7 @@ export default function ResumeBuilder() {
         type="number"
         value={age}
         onChange={(e) => {
-          HandleAgeChange(e.target.value);
+          handleAgeChange(e.target.value);
         }}
       />
       <br />
@@ -73,7 +71,7 @@ export default function ResumeBuilder() {
         type="string"
         value={college}
         onChange={(e) => {
-          HandleCollegeChange(e.target.value);
+          handleCollegeChange(e.target.value);
         }}
       />
       <br />
@@ -85,49 +83,26 @@ export default function ResumeBuilder() {
         value={cgpa}
         placeholder="upto one decimal places"
         onChange={(e) => {
-          HandleCgpaChange(e.target.value);
+          handleCgpaChange(e.target.value);
         }}
       />
       <br />
       <br />
       Select Skills:
-      <input
-        type="checkbox"
-        id="html"
-        checked={skills.includes("HTML")}
-        onChange={() => {
-          //console.log(id);
-          HandleCheckboxClick("HTML");
-        }}
-      />
-      <label>HTML</label>
-      <input
-        type="checkbox"
-        id="css"
-        checked={skills.includes("CSS")}
-        onChange={() => {
-          HandleCheckboxClick("CSS");
-        }}
-      />
-      <label>CSS</label>
-      <input
-        type="checkbox"
-        id="js"
-        checked={skills.includes("JS")}
-        onChange={() => {
-          HandleCheckboxClick("JS");
-        }}
-      />
-      <label>JS</label>
-      <input
-        type="checkbox"
-        id="react"
-        checked={skills.includes("REACT")}
-        onChange={() => {
-          HandleCheckboxClick("REACT");
-        }}
-      />
-      <label>REACT</label>
+      {skillset.map((item) => {
+        return (
+          <div>
+            <input
+              type="checkbox"
+              checked={skills.includes(item)}
+              onChange={() => {
+                handleCheckboxClick(item);
+              }}
+            />{" "}
+            <label>{item}</label>
+          </div>
+        );
+      })}
       <br />
       <br />
       <button onClick={HandleButton}>Build Resume</button>
